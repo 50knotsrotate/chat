@@ -1,1 +1,1 @@
-SELECT * FROM messages where message.id = $1;
+SELECT * FROM messages where messages.id = $1;

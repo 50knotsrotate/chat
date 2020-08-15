@@ -1,4 +1,4 @@
-const { asyncMiddleware } = require('../utils');
+const { asyncMiddleware, formatMessages } = require('../utils');
 
 async function getUser(req, res, next) {
   // req.id is passed from checkToken
@@ -19,7 +19,16 @@ async function getAllUsers(req, res, next) {
   return res.status(200).send(users);
 };
 
+async function generateUserChatroom(req, res, next) {
+  const db = req.app.get('db');
+
+  const chatroom = await db.findUserChatroomById(req.params.id.toString());
+
+  return res.status(200).send(formatMessages(chatroom));
+ }
+
 module.exports = {
   getUser,
-  getAllUsers: asyncMiddleware(getAllUsers)
+  getAllUsers: asyncMiddleware(getAllUsers),
+  generateUserChatroom: asyncMiddleware(generateUserChatroom)
 };

@@ -1,37 +1,37 @@
 /*
     --asyncMiddleware--
 
-    This function takes a middleware as an argument and wraps it in a promise. 
+    This function takes a middleware as an argument and wraps it in a promise.
     It will catch any 'silent' errors that could crash the server (No connection to DB, for example)
     This is a temporary fix until express 5 is released, where async errors
     will be handled automatically.
 
-    This function must wrap any middleware that that uses async/await. 
+    This function must wrap any middleware that that uses async/await.
 */
 
-function asyncMiddleware(fn) { 
+function asyncMiddleware(fn) {
     return function (req, res, next) {
-        Promise.resolve(fn(req, res, next)).catch(_err => { 
+        Promise.resolve(fn(req, res, next)).catch(_err => {
             console.log(_err)
             return res.boom.badRequest('Uh oh! Something went wrong on our end. Try again...');
         });
      }
 };
 
-function errorHandler(err,req, res, next) { 
+function errorHandler(err,req, res, next) {
     console.log(err);
     if (err.isBoom) {
         return res.send(err)
-    } else { 
+    } else {
         return res.boom.badRequest("Uh oh! Something went wrong on our end. Try again.");
     }
 }
 
-function notFound(req, res, next) { 
+function notFound(req, res, next) {
     return res.boom.notFound();
 }
 
-function formatMessages(){
+function formatMessages(messages){
     const channels = [];
 
     messages.forEach((message, index, messages) => {

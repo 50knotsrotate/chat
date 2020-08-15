@@ -22,7 +22,8 @@ async function addMessage(req, res, next) {
 async function getAllMessages(req, res, next) {
   const db = req.app.get('db');
 
-  const messages = db.getAllMessages();
+  const messages = await db.getAllMessages();
+
 
   return res.status(200).send(messages);
  }
@@ -46,7 +47,8 @@ async function deleteMessage(req, res, next) {
 async function getMessage(req, res, next) {
   const db = req.app.get('db');
 
-  const [message] = db.findMessageById(req.params.id);
+  const [message] = await db.findMessageById(req.params.id);
+
 
   return res.status(200).send(message);
 }

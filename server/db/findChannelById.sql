@@ -1,1 +1,3 @@
-SELECT * FROM channels where channels.id = $1;
+SELECT *
+FROM channels c
+where c.id = $1;

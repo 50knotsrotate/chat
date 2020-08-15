@@ -39,6 +39,7 @@ const { getChannel } = require('./controllers/channelsController');
 // User controller
 const { getUser } = require("./controllers/usersController");
 const { getAllUsers } = require('./controllers/usersController');
+const { generateUserChatroom } = require('./controllers/usersController');
 
 // Socket/IO controller
 const { emitMessage } = require("./controllers/socketController");
@@ -126,6 +127,9 @@ app.get("/users/:id/messages", getUserMessages);
 // User channels
 app.get('/users/:id/channels', checkToken, getUserChannels);
 app.delete("/user/channels/:id", checkToken, deleteChannel);
+
+// Generate user chatroom
+app.get('/user/:id/chatroom', checkToken, generateUserChatroom)
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname , '../', "dist/slacc-new/index.html"));

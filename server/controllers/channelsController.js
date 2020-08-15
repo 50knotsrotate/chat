@@ -19,7 +19,7 @@ async function getAllChannels(req, res, next) {
 async function createChannel(req, res, next) {
   const db = req.app.get('db');
 
-  const [channel] = db.createChannel(req.id, req.body.name);
+  const [channel] = await db.createChannel(req.id, req.body.name);
 
   res.status(200).send(channel);
 };
@@ -27,7 +27,7 @@ async function createChannel(req, res, next) {
 async function getChannel(req, res, next) {
   const db = req.app.get('db');
 
-  const [channel] = db.findChannelById(req.params.id);
+  const [channel] = await db.findChannelById(req.params.id);
 
   return res.status(200).send(channel);
 };
