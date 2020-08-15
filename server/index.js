@@ -30,6 +30,7 @@ const { getUserMessages } = require("./controllers/messagesController");
 const { getUserChannels } = require("./controllers/channelsController");
 const { getAllChannels } = require('./controllers/channelsController');
 const { createChannel } = require('./controllers/channelsController');
+const { deleteChannel } = require('./controllers/channelsController');
 
 // User controller
 const { getUser } = require("./controllers/usersController");
