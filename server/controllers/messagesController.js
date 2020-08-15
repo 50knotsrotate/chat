@@ -21,7 +21,7 @@ async function addMessage(req, res, next) {
 async function getUserMessages(req, res, next) {
   const db = req.app.get("db");
 
-  const messages = await db.getUserMessage(req.id)
+  const messages = await db.getUserMessages(req.id)
 
   res.send(messages);
 }

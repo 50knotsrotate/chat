@@ -76,10 +76,7 @@ io.on("connection", async (socket) => {
   socket.on("message", async (message) => {
     const [newMessage] = await db.createMessage(message.user_id, message.body, message.channel_id);
 
-    if (newMessage) {
-      emitMessage(newMessage, io);
-    }
-
+    if (newMessage) emitMessage(newMessage, io);
   });
 });
 
@@ -118,11 +115,11 @@ app.get('/me', checkToken, async function(req, res, next){
 //  })
 
 // Channel messages
-app.get("/channels/:id/messages", asyncMiddleware(getChannelMessages));
+app.get("/channels/:id/messages", checkToken, asyncMiddleware(getChannelMessages));
 app.post("/channels/:id/messages", checkToken, asyncMiddleware(addMessage));
 
 // User messages
-// app.get("/users/:id/messages", checkToken, asyncMiddleware(getUserMessages));
+app.get("/users/:id/messages", asyncMiddleware(getUserMessages));
 
 // User channels
 // app.get("/user/channels", checkToken, asyncMiddleware(getUserChannels));
