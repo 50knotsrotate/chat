@@ -25,6 +25,7 @@ const checkToken = require("./middleware/checkToken");
 const { getChannelMessages } = require("./controllers/messagesController");
 const { addMessage } = require("./controllers/messagesController");
 const { getUserMessages } = require("./controllers/messagesController");
+const { getAllMessages } = require('./controllers/messagesController');
 
 // Channel controller
 const { getUserChannels } = require("./controllers/channelsController");
@@ -98,7 +99,7 @@ app.post('/channels', checkToken, createChannel)
 app.put('/channels/:id', checkToken);
 app.delete('/channels/:id', checkToken);
 
-app.get('/messages', checkToken);
+app.get('/messages', checkToken, getAllMessages);
 app.post('/messages', checkToken)
 app.put('/messages/:id', checkToken);
 app.delete('/messages/:id', checkToken);

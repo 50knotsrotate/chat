@@ -1,3 +1,4 @@
+const { asyncMiddleware } = require('../utils');
 async function getChannelMessages(req, res, next) {
   const db = req.app.get("db");
 
@@ -18,6 +19,14 @@ async function addMessage(req, res, next) {
   next();
 }
 
+async function getAllMessages(req, res, next) {
+  const db = req.app.get('db');
+
+  const messages = db.getAllMessages();
+
+  return res.status(200).send(messages);
+ }
+
 async function getUserMessages(req, res, next) {
   const db = req.app.get("db");
 
@@ -30,4 +39,5 @@ module.exports = {
   getChannelMessages,
   addMessage,
   getUserMessages,
+  getAllMessages: asyncMiddleware(getAllMessages)
 };
