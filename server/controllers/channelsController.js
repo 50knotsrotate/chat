@@ -1,5 +1,3 @@
-const { constants } = require("karma");
-
 async function getUserChannels(req, res, next) {
   const db = req.app.get("db");
 
