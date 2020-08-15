@@ -1,9 +1,9 @@
 const jwt = require('jsonwebtoken');
 
 
-module.exports = function async (req, res, next) { 
+module.exports = function async (req, res, next) {
         try{
-        
+
         const decodedToken = jwt.verify(
           req.cookies.token,
           'aTk0M3F5NXR1Zzh3cmlwZXN0amYyOTgzNHdpb1tldTVyanFmY2lwcmVkeGdudnJtY2llYWsnd2x3'
@@ -11,7 +11,6 @@ module.exports = function async (req, res, next) {
 
         if (decodedToken) {
             req.id = decodedToken.data.identifier;
-            console.log(decodedToken)
             next()
         } else {
             return res.boom.unauthorized()
