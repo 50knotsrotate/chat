@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<div class="dropdown">
+  <a class="btn btn-secondary dropdown-toggle w-100" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false">
+    Channels
+  </a>
+
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <li><a class="dropdown-item" href="#">Create Channel</a></li>
+    <li><a class="dropdown-item" href="#">Browse Channels</a></li>
+  </ul>
+</div>
+<!-- class="list-group" -->
+    <div
+      *ngFor="let channel of channels; let i = index"
+    >
+      <a
+        href="#"
+        [class.active]="channel.name == selectedChannel.name"
+        [class.hasNewMessage] = 'channel.hasNewMessage'
+        (click)="switchChannel(channel.id)"
+        class="list-group-item list-group-item-action border border-bottom m-0"
+        aria-current="true"
+        *ngIf = 'channel'
+      >
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">{{ channel.name }}</h5>
+          <small>3 days ago</small>
+        </div>
+      </a>
+    </div>
+    <div *ngIf = '!channels?.length'>
+      <h1>No channels</h1>
+    </div>
+
+<!-- 
+  <div class="col-lg-9 p-0 d-flex flex-column">
+    <div class="messages">
+      <div *ngFor="let message of selectedChannel.messages">
+        <h1>{{ message.body }}</h1>
+      </div>
+    </div> -->
+
+    <!-- <div class="input border border-dark">
+      <input (change) = 'handleInput($event)' value = '{{inputValue}}' type="text" placeholder = 'Send a message...' />
+      <button (click) = 'send()'  class="btn btn-lg bg-primary">Send message</button>
+    </div>
+  </div> -->
+

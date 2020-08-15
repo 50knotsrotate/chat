@@ -1,0 +1,22 @@
+/* .main {
+    margin-top: 30px;
+    height: calc(100vh - 60px);
+} */
+
+.chat-window {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+}
+
+.messages {
+    height: 90vh;
+}
+
+.input{
+height: calc(10vh - 60px);
+/* background-color: red; */
+
+border: 1px solid black;
+height: 100%;
+}

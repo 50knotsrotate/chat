@@ -1,0 +1,75 @@
+
+    <section class="signin-area signin-area-five">
+        <div class="container">
+            <div class="row justify-content-end">
+                <div class="col-lg-6">
+                    <div class="sing-in-form-area mt-45 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.4s">
+                        <h4 class="sing-in-title"><i class="lni-user"></i> Sign Up</h4>
+                        <p class="text ">You know you want to. </p>
+                        
+                        <div class="sing-in-form-wrapper form-style-one">
+                            <form #myform = "ngForm" action="http://localhost:3002/auth/signup" [formGroup] = 'user' (ngSubmit) = "onSubmit(myform)">
+                                <div class="form-input mt-25">
+                                    <label>User name</label>
+                                    <div class="input-items default">
+                                        <input  ngModel formControlName = 'username' type="text" name = 'username'  placeholder="User name">
+                                        <i class="lni-user"></i>
+                                    </div>
+                                </div> <!-- form input -->
+
+                                <div class="form-input mt-25">
+                                    <label>Email</label>
+                                    <div class="input-items default">
+                                        <input ngModel formControlName = 'email' type="text" placeholder="Email" name = 'email' >
+                                        <i class="lni-envelope"></i>
+                                    </div>
+                                </div> <!-- form input -->
+
+                                <div class="form-input mt-25">
+                                    <label>Password</label>
+                                    <div class="input-items default">
+                                        <input ngModel formControlName = 'password' type="password" name = 'password'  placeholder="********">
+                                        <i class="lni-key"></i>
+                                    </div>
+                                </div> <!-- form input -->
+
+                                <!-- <div class="single-form mt-15">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="facebook-sing-up mt-30">
+                                                <a href="#"><i class="lni-facebook-original"></i> Facebook</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="gooogle-sing-up mt-30">
+                                                <a href="#"><i class="lni-google"></i> Google Plus</a>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                </div>  -->
+
+                                <div class="single-form mt-45 d-sm-flex justify-content-between">
+                                    <div class="form-checkbox">
+                                        <input type="checkbox" name="checkbox2" id="checkbox2">
+                                        <label for="checkbox2"></label> <span>I agree to the terms and policy.</span>
+                                    </div>
+                                </div> <!-- single-form -->
+                                
+                                <div class="single-form standard-buttons mt-45">
+                                    <input type="submit" class="main-btn standard-two" value = 'Sign Up!' />
+                                </div> <!-- single-form -->
+                            </form>
+                            <div class="new-user text-center">
+                                <p class="text"><a routerLink = '/login'>Already have an account?</a>
+                            </div>
+                        </div> <!-- sing in form wrapper -->
+                    </div>  <!-- sing in form areasing-in-form-area -->
+                </div>
+            </div> <!-- row -->
+        </div> <!-- container -->
+        <div class="sing-in-image d-flex align-items-center wow fadeInRightBig d-none d-lg-block" data-wow-duration="1s" data-wow-delay="0.7s">
+            <div class="image">
+                <img src="../../assets/images/sign-in-up.png" alt="sing in">
+            </div>
+        </div> <!-- sing in image -->
+    </section>

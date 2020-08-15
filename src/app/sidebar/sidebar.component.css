@@ -1,0 +1,17 @@
+.messages {
+    flex-grow: 1;
+}
+
+.input {
+    height: 25%;
+}
+
+.chat {
+    height: calc(100vh - 60px);
+    margin-top: 30px;
+}
+
+.hasNewMessage {
+    background-color: cyan;
+    color: white;
+}

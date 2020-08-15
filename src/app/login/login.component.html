@@ -1,0 +1,54 @@
+<section class="signin-area signin-area-four mb-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="sing-in-form-area mt-45 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.4s">
+                        <h4 class="sing-in-title"><i class="lni-user"></i> Login</h4>
+                        <p class="text">It's so good to see you again. </p>
+                        
+                        <div class="sing-in-form-wrapper form-style-one">
+                            <form  #myform = "ngForm" action="http://localhost:3002/auth/signin"  method = 'POST' [formGroup] = 'loginForm' (ngSubmit) = "onSubmit(myform)">
+                                <div class="form-input mt-25">
+                                    <label>Username</label>
+                                    <div class="input-items default">
+                                        <input ngModel formControlName = 'username' type="text" placeholder="Username">
+                                        <i class="lni-envelope"></i>
+                                    </div>
+                                </div> <!-- form input -->
+
+                                <div class="form-input mt-25">
+                                    <label>Password</label>
+                                    <div class="input-items default">
+                                        <input ngModel formControlName = 'password' type="password" placeholder="********">
+                                        <i class="lni-key"></i>
+                                    </div>
+                                </div> <!-- form input -->
+
+                                <div class="single-form mt-35 d-sm-flex justify-content-between">
+                                    <div class="form-checkbox mt-10">
+                                        <input type="checkbox" name="checkbox1" id="checkbox1">
+                                        <label for="checkbox1"></label> <span>Remember Me</span>
+                                    </div>
+                                    <div class="form-forget mt-10">
+                                        <a href="#">Forget Password?</a>
+                                    </div>
+                                </div> 
+                                
+                                <div class="single-form standard-buttons mt-45">
+                                    <button type="submit" class="main-btn standard-two">Login</button>
+                                </div> <!-- single-form -->
+                            </form>
+                            <div class="new-user text-center">
+                                <p class="text"><a routerLink = '/signup'>Need to make an account?</a></p>
+                            </div>
+                        </div> <!-- sing in form wrapper -->
+                    </div>  <!-- sing in form areasing-in-form-area -->
+                </div>
+            </div> <!-- row -->
+        </div> <!-- container -->
+        <div class="sing-in-image d-flex align-items-center wow fadeInRightBig" data-wow-duration="1s" data-wow-delay="0.7s">
+            <div class="image">
+                <img src="../../assets/images/sign-in-up.png" alt="sing in">
+            </div>
+        </div> <!-- sing in image -->
+    </section>
