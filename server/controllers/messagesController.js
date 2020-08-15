@@ -43,10 +43,19 @@ async function deleteMessage(req, res, next) {
   return res.status(200).send();
 }
 
+async function getMessage(req, res, next) {
+  const db = req.app.get('db');
+
+  const [message] = db.findMessageById(req.params.id);
+
+  return res.status(200).send(message);
+}
+
 module.exports = {
   getChannelMessages,
   addMessage,
   getUserMessages: asyncMiddleware(getUserMessages),
   getAllMessages: asyncMiddleware(getAllMessages),
-  deleteMessage: asyncMiddleware(deleteMessage)
+  deleteMessage: asyncMiddleware(deleteMessage),
+  getMessage : asyncMiddleware(getMessage)
 };

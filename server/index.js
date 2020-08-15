@@ -27,12 +27,14 @@ const { addMessage } = require("./controllers/messagesController");
 const { deleteMessage } = require('./controllers/messagesController');
 const { getUserMessages } = require("./controllers/messagesController");
 const { getAllMessages } = require('./controllers/messagesController');
+const { getMessage } = require('./controllers/messagesController');
 
 // Channel controller
 const { getUserChannels } = require("./controllers/channelsController");
 const { getAllChannels } = require('./controllers/channelsController');
 const { createChannel } = require('./controllers/channelsController');
 const { deleteChannel } = require('./controllers/channelsController');
+const { getChannel } = require('./controllers/channelsController');
 
 // User controller
 const { getUser } = require("./controllers/usersController");
@@ -99,12 +101,14 @@ app.get('/users', checkToken, getAllUsers);
 
 // Channels
 app.get('/channels', checkToken, getAllChannels);
+app.get('/channels/:id', checkToken, getChannel)
 app.post('/channels', checkToken, createChannel)
 app.put('/channels/:id', checkToken);
 app.delete('/channels/:id', checkToken, deleteChannel);
 
 // Messages
 app.get('/messages', checkToken, getAllMessages);
+app.get('/messages/:id', checkToken, getMessage)
 app.post('/messages', checkToken, addMessage);
 app.put('/messages/:id', checkToken);
 app.delete('/messages/:id', checkToken, deleteMessage);
