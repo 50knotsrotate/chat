@@ -107,7 +107,10 @@ app.post("/channels/:id/messages", checkToken, asyncMiddleware(addMessage));
 app.get("/users/:id/messages", asyncMiddleware(getUserMessages));
 
 // User channels
-// app.get("/user/channels", checkToken, asyncMiddleware(getUserChannels));
+app.get("/user/channels", checkToken, asyncMiddleware(getUserChannels));
+app.post('/user/channels', checkToken)
+app.put('/user/channels/:id', checkToken);
+app.delete('/user/channels/:id', checkToken)
 
 // Users
 // app.get("/users/:id", checkToken, asyncMiddleware(getUser));
