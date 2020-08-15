@@ -26,8 +26,17 @@ async function createChannel(req, res, next) {
   res.status(200).send(channel);
 };
 
+async function deleteChannel(req, res, next) {
+  const db = req.app.get('db');
+
+  await db.deleteChannel(req.params.id);
+
+  return res.status(200).send();
+};
+
 module.exports = {
   getUserChannels: asyncMiddleware(getUserChannels),
   getAllChannels:  asyncMiddleware(getAllChannels),
-  createChannel:   asyncMiddleware(createChannel)
+  createChannel:   asyncMiddleware(createChannel),
+  deleteChannel: asyncMiddleware(deleteChannel)
 };
