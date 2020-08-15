@@ -7,9 +7,7 @@ async function getUserChannels(req, res, next) {
 
   let userId = 1;
 
-  const channels = await db.query(
-    `select * from channels c join channelMember cm on cm.channel_id = c.id where cm.user_id = ${userId}`
-  );
+  const channels = await db.getUserChannels(userId)
 
   // TODO: Dont need this anymore.
   const firstChannelId = channels[0].id;

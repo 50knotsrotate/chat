@@ -55,7 +55,7 @@ app.use(cors("*"));
 
 app.use(express.static(`${__dirname}/../dist/slacc-new`));
 
-// let db;
+let db;
 
 
 console.log(CONNECTION_STRING)
@@ -74,31 +74,12 @@ io.on("connection", async (socket) => {
   socket.join(2);
 
   socket.on("message", async (message) => {
-    console.log('index 78')
-    console.log(message)
-    const query = `
-                  INSERT INTO Messages(user_id, body, channel_id)
-                  VALUES(${message.user_id},
-
-                        '${message.body}',
-                         ${message.channel_id});
-
-                  select m.body, m.channel_id, m.id, c.name, u.username
-                  from messages m
-                  join channels c on c.id = m.channel_id
-                  join users u on u.id = m.user_id
-                  where m.channel_id in
-                 (select cm.channel_id from channelMember cm where cm.user_id = 1)
-                  order by m.id desc
-                  limit 1;
-                  `
-    const [newMessage] = await db.query(query);
+    const [newMessage] = await db.createMessage(message.user_id, message.body, message.channel_id);
 
     if (newMessage) {
-      console.log('new message index 99')
-      console.log(newMessage)
       emitMessage(newMessage, io);
     }
+
   });
 });
 
