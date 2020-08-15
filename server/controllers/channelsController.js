@@ -18,7 +18,16 @@ async function getAllChannels(req, res, next) {
   res.status(200).send(channels);
 };
 
+async function createChannel(req, res, next) {
+  const db = req.app.get('db');
+
+  const [channel] = db.createChannel(req.id, req.body.name);
+
+  res.status(200).send(channel);
+};
+
 module.exports = {
   getUserChannels: asyncMiddleware(getUserChannels),
-  getAllChannels:  asyncMiddleware(getAllChannels)
+  getAllChannels:  asyncMiddleware(getAllChannels),
+  createChannel:   asyncMiddleware(createChannel)
 };

@@ -29,6 +29,7 @@ const { getUserMessages } = require("./controllers/messagesController");
 // Channel controller
 const { getUserChannels } = require("./controllers/channelsController");
 const { getAllChannels } = require('./controllers/channelsController');
+const { createChannel } = require('./controllers/channelsController');
 
 // User controller
 const { getUser } = require("./controllers/usersController");
@@ -92,7 +93,7 @@ app.get('/me', checkToken, getUser);
 
 // Channels
 app.get('/channels', checkToken, getAllChannels);
-app.post('/channels', checkToken)
+app.post('/channels', checkToken, createChannel)
 app.put('/channels/:id', checkToken);
 app.delete('/channels/:id', checkToken);
 
