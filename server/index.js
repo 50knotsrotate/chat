@@ -55,7 +55,7 @@ app.use(cors("*"));
 
 app.use(express.static(`${__dirname}/../dist/slacc-new`));
 
-let db;
+// let db;
 
 
 console.log(CONNECTION_STRING)
