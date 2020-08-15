@@ -96,8 +96,6 @@ app.get('/me', checkToken, getUser);
 
 // Users
 app.get('/users', checkToken, getAllUsers);
-app.get("/users/:id/messages", getUserMessages);
-app.get('/users/:id/channels', checkToken, getUserChannels);
 
 // Channels
 app.get('/channels', checkToken, getAllChannels);
@@ -111,20 +109,19 @@ app.post('/messages', checkToken, addMessage);
 app.put('/messages/:id', checkToken);
 app.delete('/messages/:id', checkToken, deleteMessage);
 
+
+
+// Channel Messages
 app.get("/channels/:id/messages", checkToken, asyncMiddleware(getChannelMessages));
 app.post("/channels/:id/messages", checkToken, asyncMiddleware(addMessage));
 
+
 // User messages
-app.get("/users/:id/messages", asyncMiddleware(getUserMessages));
+app.get("/users/:id/messages", getUserMessages);
 
 // User channels
-app.get("/user/channels", checkToken, asyncMiddleware(getUserChannels));
-app.post('/user/channels', checkToken)
-app.put('/user/channels/:id', checkToken);
-app.delete('/user/channels/:id', checkToken)
-
-// Users
-// app.get("/users/:id", checkToken, asyncMiddleware(getUser));
+app.get('/users/:id/channels', checkToken, getUserChannels);
+app.delete("/user/channels/:id", checkToken, deleteChannel);
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname , '../', "dist/slacc-new/index.html"));
