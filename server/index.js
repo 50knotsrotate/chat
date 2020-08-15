@@ -133,6 +133,8 @@ app.post('/channels', checkToken)
 app.put('/channels/:id', checkToken);
 app.delete('/channels/:id', checkToken);
 
+app.get('/messages', checkToken);
+
 app.get("/channels/:id/messages", checkToken, asyncMiddleware(getChannelMessages));
 app.post("/channels/:id/messages", checkToken, asyncMiddleware(addMessage));
 
