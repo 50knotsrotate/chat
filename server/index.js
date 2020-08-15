@@ -100,7 +100,7 @@ app.put('/channels/:id', checkToken);
 app.delete('/channels/:id', checkToken);
 
 app.get('/messages', checkToken, getAllMessages);
-app.post('/messages', checkToken)
+app.post('/messages', checkToken, addMessage);
 app.put('/messages/:id', checkToken);
 app.delete('/messages/:id', checkToken);
 
