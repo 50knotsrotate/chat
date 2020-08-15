@@ -36,6 +36,7 @@ const { deleteChannel } = require('./controllers/channelsController');
 
 // User controller
 const { getUser } = require("./controllers/usersController");
+const { getAllUsers } = require('./controllers/usersController');
 
 // Socket/IO controller
 const { emitMessage } = require("./controllers/socketController");
@@ -93,6 +94,8 @@ app.post("/auth/signin", authenticateUser, issueToken);
 
 app.get('/me', checkToken, getUser);
 
+// Users
+app.get('/users', checkToken, getAllUsers);
 
 // Channels
 app.get('/channels', checkToken, getAllChannels);
@@ -100,6 +103,7 @@ app.post('/channels', checkToken, createChannel)
 app.put('/channels/:id', checkToken);
 app.delete('/channels/:id', checkToken);
 
+// Messages
 app.get('/messages', checkToken, getAllMessages);
 app.post('/messages', checkToken, addMessage);
 app.put('/messages/:id', checkToken);
