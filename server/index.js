@@ -97,12 +97,13 @@ app.get('/me', checkToken, getUser);
 // Users
 app.get('/users', checkToken, getAllUsers);
 app.get("/users/:id/messages", getUserMessages);
+app.get('/users/:id/channels', checkToken, getUserChannels);
 
 // Channels
 app.get('/channels', checkToken, getAllChannels);
 app.post('/channels', checkToken, createChannel)
 app.put('/channels/:id', checkToken);
-app.delete('/channels/:id', checkToken);
+app.delete('/channels/:id', checkToken, deleteChannel);
 
 // Messages
 app.get('/messages', checkToken, getAllMessages);
