@@ -96,6 +96,7 @@ app.get('/me', checkToken, getUser);
 
 // Users
 app.get('/users', checkToken, getAllUsers);
+app.get("/users/:id/messages", getUserMessages);
 
 // Channels
 app.get('/channels', checkToken, getAllChannels);
