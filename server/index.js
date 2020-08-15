@@ -103,6 +103,8 @@ io.on("connection", async (socket) => {
 });
 
 // Endpoints
+
+// Auth
 app.post(
   "/auth/signup",
   checkFormComplete,
@@ -125,16 +127,9 @@ app.get('/me', checkToken, async function(req, res, next){
 });
 
 
-// app.get('/channels',  checkToken, async (req, res, next) => {
-//   const db = req.app.get('db')
-//   const query = `
-//     SELECT * FROM channels;
-//   `
+// Channels
+app.get('/channels', checkToken)
 
-//   const channels = await db.query(query);
-
-//   res.status(200).send(channels);
-//  })
 
 // Channel messages
 app.get("/channels/:id/messages", checkToken, asyncMiddleware(getChannelMessages));
