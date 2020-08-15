@@ -130,6 +130,7 @@ app.get('/me', checkToken, async function(req, res, next){
 // Channels
 app.get('/channels', checkToken)
 app.post('/channels', checkToken)
+app.put('/channels', checkToken);
 
 app.get("/channels/:id/messages", checkToken, asyncMiddleware(getChannelMessages));
 app.post("/channels/:id/messages", checkToken, asyncMiddleware(addMessage));
