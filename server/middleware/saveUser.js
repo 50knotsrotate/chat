@@ -19,7 +19,7 @@ module.exports = asyncMiddleware(
 
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    const [user] = await db.createUser(username, hashedPassword)
+    const [user] = await db.saveUser(username, hashedPassword)
 
     if (!user) return res.boom.badImplementation("Uh oh! Something went wrong and your account was not created.");
     res.user = user;

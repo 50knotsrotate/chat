@@ -22,7 +22,7 @@ module.exports.checkUniqueUsername = asyncMiddleware(
 
     const [user] = await db.getUser(username);
 
-    if (!user) return res.boom.badRequest("Sorry, that username is taken");
+    if (user) return res.boom.badRequest("Sorry, that username is taken");
 
     next();
   }

@@ -1,4 +1,4 @@
-/* 
+/*
     ROUTE(S): POST /signup /signin
     PURPOSE: This function hashes a username and issues a JWT. This should always be the last middleware for these routes.
     for POST /signup and POST /signin
@@ -40,7 +40,7 @@ function issueToken(req, res, next) {
   const token = jwt.sign(payload, secret, options);
 
 
-  if (!token) { 
+  if (!token) {
     return res.boom.unauthorized('Access denied')
   }
 
