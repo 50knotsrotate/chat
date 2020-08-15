@@ -35,9 +35,18 @@ async function getUserMessages(req, res, next) {
   res.send(messages);
 }
 
+async function deleteMessage(req, res, next) {
+  const db = req.app.get('db');
+
+  await db.deleteMessage();
+
+  return res.status(200).send();
+}
+
 module.exports = {
   getChannelMessages,
   addMessage,
   getUserMessages,
-  getAllMessages: asyncMiddleware(getAllMessages)
+  getAllMessages: asyncMiddleware(getAllMessages),
+  deleteMessage: asyncMiddleware(deleteMessage)
 };
