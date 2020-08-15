@@ -30,9 +30,9 @@ async function getAllMessages(req, res, next) {
 async function getUserMessages(req, res, next) {
   const db = req.app.get("db");
 
-  const messages = await db.getUserMessages(req.id)
+  const messages = await db.getUserMessages(req.id);
 
-  res.send(messages);
+  return res.status(200).send(messages);
 }
 
 async function deleteMessage(req, res, next) {
