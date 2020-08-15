@@ -118,7 +118,7 @@ app.get('/me', checkToken, async function(req, res, next){
 //  })
 
 // Channel messages
-app.get("/channels/:id/messages", checkToken, asyncMiddleware(getChannelMessages));
+app.get("/channels/:id/messages", asyncMiddleware(getChannelMessages));
 app.post("/channels/:id/messages", checkToken, asyncMiddleware(addMessage));
 
 // User messages
