@@ -19,15 +19,9 @@ module.exports = asyncMiddleware(
 
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    const query = `INSERT INTO USERS(username,password) VALUES('${username}', '${hashedPassword}') RETURNING *;`;
+    const [user] = await db.createUser(username, hashedPassword)
 
-    const [user] = await db.query(query);
-
-    if (!user) {
-      return res.boom.badImplementation(
-        "Uh oh! Something went wrong and your account was not created."
-      );
-    }
+    if (!user) return res.boom.badImplementation("Uh oh! Something went wrong and your account was not created.");
     res.user = user;
     next();
   }
