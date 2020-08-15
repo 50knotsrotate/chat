@@ -19,9 +19,7 @@ async function getAllChannels(req, res, next) {
 async function createChannel(req, res, next) {
   const db = req.app.get('db');
 
-  const channel = db.createChannel(req.id, req.body.name);
-
-  console.log(channel)
+  const [channel] = db.createChannel(req.id, req.body.name);
 
   res.status(200).send(channel);
 };
