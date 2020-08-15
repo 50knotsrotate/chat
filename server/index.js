@@ -83,26 +83,10 @@ io.on("connection", async (socket) => {
 // Endpoints
 
 // Auth
-app.post(
-  "/auth/signup",
-  checkFormComplete,
-  checkUniqueUsername,
-  saveUser,
-  issueToken
-);
+app.post("/auth/signup",checkFormComplete,checkUniqueUsername,saveUser,issueToken);
 app.post("/auth/signin", authenticateUser, issueToken);
 
-app.get('/me', checkToken, async function(req, res, next){
-    const [user] = await db.query(`
-    SELECT * FROM users u WHERE u.id = ${req.id};
-    `)
-
-    if(user){
-      return res.status(200).send(user)
-    } else {
-      return res.boom.unauthorized()
-    }
-});
+app.get('/me', checkToken, getUser);
 
 
 // Channels
