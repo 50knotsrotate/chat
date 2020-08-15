@@ -1,11 +1,12 @@
 async function getUser(req, res, next) {
+  // req.id is passed from checkToken
   const db = req.app.get("db");
 
-  const [user] = await db.query(`select u.username from users u where u.id = ${req.params.id}`);
+  const [user] = await db.query(`SELECT * FROM users u WHERE u.id = ${req.id};`);
 
-  if (!user) return res.boom.notFound();
-    
-  res.status(200).send(user);
+  if (user) return res.status(200).send(user)
+
+  return res.boom.unauthorized();
 }
 
 module.exports = {
