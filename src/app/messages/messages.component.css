@@ -1,23 +1,12 @@
-.wrapper {
-  display: flex;
-  flex-direction: column;
+
+.messages {
+    flex-basis: 85%;
 }
 
-.flex-item:hover {
-  flex-basis: 80%;
-  flex-grow: 5;
-  background-color: blue;
+.input {
+  flex-basis: 15%;
+  border: 1px solid black;
 }
-
-._m {
-  max-height: 100vh;
-}
-
-.item-1 {
-  flex-basis: 80%;
-  background-color: blue;
-}
-
 @media only screen and (max-width: 576px) {
   .wrapper {
     flex-direction: row;

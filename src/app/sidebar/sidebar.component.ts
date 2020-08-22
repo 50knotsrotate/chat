@@ -18,13 +18,13 @@ export class SidebarComponent implements OnInit {
 
     @Input()
     selectedChannel: Object;
-  
+
   @Input()
   switchChannel: Function;
 
   @Input()
   public channels
-  
+
 
 
   @Input()
@@ -42,16 +42,16 @@ export class SidebarComponent implements OnInit {
     this.inputValue = e.target.value;
   };
 
- 
+
 
   ngOnInit(): void {
 
-  //   this.channelService.getUserChannels().subscribe(channels => { 
-  //     this.channels = channels;
-  //     this.selectedChannel = this.channels[0];
-     
-  //   })
+    // this.channelService.getUserChannels().subscribe(channels => {
+    //   this.channels = channels;
+    //   this.selectedChannel = this.channels[0];
+
+    // })
     }
 
 }
-  
+
