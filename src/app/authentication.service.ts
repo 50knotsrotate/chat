@@ -39,13 +39,13 @@ export class AuthenticationService implements CanActivate {
       this.userService.setUser(user);
 
       localStorage.setItem('token', token);
-      
+
       this.router.navigateByUrl('/');
     });
   }
 
   canActivate(route: ActivatedRouteSnapshot) {
-   if(this.userService.getUser()){
+   if(this.userService.user){
     return true
    } else {
      return false

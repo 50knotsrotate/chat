@@ -35,6 +35,7 @@ const { getAllChannels } = require('./controllers/channelsController');
 const { createChannel } = require('./controllers/channelsController');
 const { deleteChannel } = require('./controllers/channelsController');
 const { getChannel } = require('./controllers/channelsController');
+const { joinChannel } = require('./controllers/channelsController');
 
 // User controller
 const { getUser } = require("./controllers/usersController");
@@ -101,9 +102,9 @@ app.get('/me', checkToken, getUser);
 app.get('/users', checkToken, getAllUsers);
 
 // Channels
-app.get('/channels', checkToken, getAllChannels);
+app.get('/channels', getAllChannels);
 app.get('/channels/:id', checkToken, getChannel)
-app.post('/channels', checkToken, createChannel)
+app.post('/channels', createChannel)
 app.put('/channels/:id', checkToken);
 app.delete('/channels/:id', checkToken, deleteChannel);
 
@@ -126,6 +127,7 @@ app.get("/users/:id/messages", getUserMessages);
 
 // User channels
 app.get('/users/:id/channels', checkToken, getUserChannels);
+app.post('/users/:id/channels', joinChannel )
 app.delete("/user/channels/:id", checkToken, deleteChannel);
 
 // Generate user chatroom
@@ -133,6 +135,7 @@ app.get('/user/:id/chatroom', checkToken, generateUserChatroom)
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname , '../', "dist/slacc-new/index.html"));
+  // res.sendFile(path.join(__dirname, "../src/index.html"));
 });
 
 // Listen

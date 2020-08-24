@@ -14,20 +14,25 @@ import { UserService } from '../user.service';
 })
 export class SidebarComponent implements OnInit {
   constructor(private http: HttpClient, private SocketService: SocketService, private channelService: ChannelService, public userService: UserService) {
+
   }
 
-    @Input()
-    selectedChannel: Object;
+  channels;
+  //   @Input()
+    selectedChannel: any;
 
   @Input()
   switchChannel: Function;
 
   @Input()
-  public channels
+  addChannel: Function;
+  // public channels
 
 
 
-  @Input()
+
+
+  // @Input()
   public inputValue: String;
 
 
@@ -46,11 +51,8 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // this.channelService.getUserChannels().subscribe(channels => {
-    //   this.channels = channels;
-    //   this.selectedChannel = this.channels[0];
+    this.channels = this.channelService.channels;
 
-    // })
     }
 
 }

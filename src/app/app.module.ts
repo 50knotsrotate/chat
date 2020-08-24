@@ -25,7 +25,8 @@ import { ExploreComponent } from './explore/explore.component';
 
 // @ts-lint disable
 import { AuthGuard } from './auth.guard';
-import { NotFoundComponent } from './not-found/not-found.component'
+import { NotFoundComponent } from './not-found/not-found.component';
+import { NewChannelComponent } from './new-channel/new-channel.component'
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { NotFoundComponent } from './not-found/not-found.component'
     HomeComponent,
     ExploreComponent,
     NotFoundComponent,
+    NewChannelComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,7 +51,7 @@ import { NotFoundComponent } from './not-found/not-found.component'
       { path: '', component: HomeComponent },
       { path: 'signup', component: SignupComponent },
       { path: 'login', component: LoginComponent },
-      { path: 'chat', component: ChatComponent, canActivate: [AuthGuard]},
+      { path: 'chat', component: ChatComponent},
       { path: 'explore', component: ExploreComponent },
     ]),
     HttpClientModule,

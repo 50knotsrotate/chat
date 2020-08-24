@@ -13,7 +13,7 @@ export class AuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      const user = this.userService.getUser();
+    const { user } = this.userService
 
       if(user){
         return true
@@ -22,7 +22,7 @@ export class AuthGuard implements CanActivate {
         return false
       }
 
-      
+
   }
-  
+
 }

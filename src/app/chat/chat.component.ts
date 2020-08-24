@@ -21,53 +21,36 @@ export class ChatComponent {
     this.switchChannel = this.switchChannel.bind(this);
     this.send = this.send.bind(this);
     this.handleInput = this.handleInput.bind(this);
-
+    this.addChannel = this.addChannel.bind(this);
   }
 
   private subject = new Subject<any>();
-  public channels;
+  @Input() channels : any = [];
 
   public channelNames: any;
 
   public soket;
 
-  // @Input()
+  @Input()
   public selectedChannel;
 
-  // @Input()
+  @Input()
   public messages;
 
   public user;
 
   public inputValue: String = '';
 
-  // @Input()
-  // switchChannel(newChannelId) {
-  //   const newChannelIndex = this.channels.findIndex(
-  //     (channel) => channel.id === newChannelId
-  //   );
-
-  //   if (newChannelIndex === -1) return;
-
-  //   this.selectedChannel = this.channels[newChannelIndex];
-
-  //   this.selectedChannel.hasNewMessage = false;
-
-  //   this.messagesService
-  //     .getChannelMessages(this.selectedChannel.id)
-  //     .subscribe((messages) => (this.messages = messages));
-  // }
 
   @Input()
   send() {
-
-    const user = this.userService.getUser()
+    const { user } = this.userService;
 
     const message = {
       channel_id: null,
       body: null,
-      user_id: null,
-      username: null
+      user_id: user.id,
+      username: null,
     };
 
     // message.channel_id = this.selectedChannel.channel_id;
@@ -80,15 +63,14 @@ export class ChatComponent {
     // message.user_id = 1;
 
     // message.username = user.username
-    message.username = user.username
-
+    message.username = user.username;
 
     this.SocketService.send(message);
     this.inputValue = '';
   }
 
-  clicked(){
-    console.log('clicked')
+  clicked() {
+    console.log('clicked');
   }
 
   @Input()
@@ -107,57 +89,65 @@ export class ChatComponent {
       if (channelIndex > -1) {
         channels[channelIndex].messages.push(message);
       } else {
-        channels.push({ name: messages[index].name, id: message.channel_id , messages: [message] });
+        channels.push({
+          name: messages[index].name,
+          id: message.channel_id,
+          messages: [message],
+        });
       }
     });
-    return channels
+    return channels;
   }
 
+  @Input()
   switchChannel(channel) {
-   let newChannelIndex = this.channels.findIndex(c => channel === c.name);
+    let newChannelIndex = this.channels.findIndex((c) => channel === c.name);
 
-   this.selectedChannel = this.channels[newChannelIndex];
+    this.selectedChannel = this.channels[newChannelIndex];
   }
 
 
+  @Input()
+    addChannel(channel) {
+    this.channels.push(channel);
+    // this.router.navigateByUrl('/chat')
+    // this.selectedChannel = this.channels[channel];
+    }
 
+  async init() {
+    // this.messagesService.getUserMessages()
+    await this.channelService.getUserChannels()
+   }
 
+  ngOnInit(): void {
+    this.init()
+    // this.userService.isUserAuthenticated()
+    //   .subscribe(user => {
 
- ngOnInit(): void {
+    //     this.userService.setUser(user);
 
-  // this.userService.isUserAuthenticated()
-  //   .subscribe(user => {
-  //     // console.log(user)
-  //     this.userService.setUser(user);
-  //     this.user = this.userService.getUser();
-  //     console.log('this.user')
-  //       console.log(this.user)
+    //       this.messagesService.getUserMessages(this.user.id).subscribe((messages) => {
 
-  //       this.messagesService.getUserMessages(this.user.id).subscribe((messages) => {
+    //       this.channels = this.formatMessages(messages);
 
-  //       this.channels = this.formatMessages(messages);
+    //       for (let channel of this.channels) {
 
+    //         this.selectedChannel = channel;
 
-  //       for (let channel of this.channels) {
+    //         break;
+    //     }
+    //               this.SocketService.connect()
+    //           .subscribe(message => {
 
-  //         this.selectedChannel = channel;
+    //             console.log('THIS IS THE MESSAGE THAT CAME IN')
+    //             console.log(message)
+    //             this.selectedChannel.messages.push(message);
 
-  //         break;
-  //     }
-  //               this.SocketService.connect()
-  //           .subscribe(message => {
+    //             console.log('THIS IS THE SELECTED CHANNEL')
+    //             console.log(this.selectedChannel)
+    //     })
+    //   });
 
-  //             console.log('THIS IS THE MESSAGE THAT CAME IN')
-  //             console.log(message)
-  //             this.selectedChannel.messages.push(message);
-
-  //             console.log('THIS IS THE SELECTED CHANNEL')
-  //             console.log(this.selectedChannel)
-  //     })
-  //   });
-
-
-  // })
-
+    // })
   }
 }

@@ -1,0 +1,50 @@
+<div class="container">
+
+                <!-- <form [formGroup]="newChannel" (ngSubmit)="onSubmit()"> -->
+                  <form [formGroup]="channel" (ngSubmit)="onSubmit()">
+                    <h2 class="mt-5">Create Channel</h2>
+
+                  <div class="form-input mt-25">
+                    <label>Name</label>
+                    <div class="input-items default">
+                      <input
+                        formControlName="name"
+                        type="text"
+                        placeholder="Channel Name"
+                      />
+                      <i class="lni-envelope"></i>
+                    </div>
+                  </div>
+
+                  <div class="form-input mt-25">
+                    <label>Channel Image</label>
+                    <div class="input-items default">
+                      <input
+                        formControlName="image"
+                        type="file"
+                        placeholder="Upload Channel Image"
+                      />
+                      <i class="lni-envelope"></i>
+                    </div>
+                  </div>
+
+                  <div class="form-input mt-25">
+                    <label>Description</label>
+                    <div class="input-items default">
+                      <textarea
+                        formControlName="description"
+                        type="text"
+                        placeholder="Tell us a little bit about it"
+                      ></textarea>
+                      <i class="lni-key"></i>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary"
+                    >
+                      Create
+                    </button>
+                  </div>
+                </form>
+
+</div>

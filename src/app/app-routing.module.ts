@@ -13,6 +13,7 @@ import { SignupComponent } from './signup/signup.component';
 import { HomeComponent } from './home/home.component';
 import { ExploreComponent } from './explore/explore.component';
 import {NotFoundComponent} from './not-found/not-found.component';
+import { NewChannelComponent} from './new-channel/new-channel.component'
 
 // @ts-lint disable
 import { AuthGuard } from './auth.guard'
@@ -22,7 +23,7 @@ const routes: Routes = [
         { path: '', component: HomeComponent },
       { path: 'signup', component: SignupComponent },
       { path: 'login', component: LoginComponent },
-  { path: 'chat', component: ChatComponent, children: [{path: '', component: MessagesComponent}, {path: 'explore', component: ExploreComponent}]},
+  { path: 'chat', component: ChatComponent, children: [{ path: '', component: MessagesComponent }, { path: 'explore', component: ExploreComponent }, {path: 'new', component: NewChannelComponent}]},
       { path: '**', component: NotFoundComponent },
 ];
 

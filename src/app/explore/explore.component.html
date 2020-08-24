@@ -4,56 +4,141 @@
       <div class="d-flex justify-content-between align-items-center p-3 my-1">
         <p><strong>Channel Browser</strong></p>
         <!-- Button trigger modal -->
-<button type="button" class="btn btn-light border-dark" data-toggle="modal" data-target="#exampleModalScrollable">
-   Create Channel
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalScrollableTitle">Create Channel</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+        <button
+          type="button"
+          class="btn btn-light border-dark"
+          data-toggle="modal"
+          [routerLink] = "['/chat/new']"
+        >
+          Create Channel
         </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Done</button>
-      </div>
-    </div>
-  </div>
-</div>
+
+        <!-- Modal -->
+        <!-- <div
+          class="modal fade show"
+
+          id="exampleModalScrollable"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="exampleModalScrollableTitle"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalScrollableTitle">
+                  Create Channel
+                </h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form [formGroup]="newChannel" (ngSubmit)="onSubmit()">
+                  <p *ngIf = 'error' class = 'bg-success'>{{error}}</p>
+                  <div class="form-input mt-25">
+                    <label>Name</label>
+                    <div class="input-items default">
+                      <input
+                        formControlName="name"
+                        type="text"
+                        placeholder="Channel Name"
+                      />
+                      <i class="lni-envelope"></i>
+                    </div>
+                  </div>
+
+                  <div class="form-input mt-25">
+                    <label>Description</label>
+                    <div class="input-items default">
+                      <textarea
+                        formControlName="description"
+                        type="text"
+                        placeholder="Tell us a little bit about it"
+                      ></textarea>
+                      <i class="lni-key"></i>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                    <button type="submit" class="btn btn-primary"
+                            [class.loading] = 'loading'
+                            [class.success] = 'success'
+                    >
+                      Create
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div> -->
+        <!-- </div> -->
       </div>
       <input
         type="text"
         class="form-control form-control-lg border-dark"
         placeholder="Search by channel name"
+        (keyup)="filterChannelsByName($event)"
       />
-      <div class="d-flex justify-content-between mt-2">
-        <p class="text-muted">235 channels</p>
-<div class="dropdown">
-  <a class="btn light dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Sort By A-Z
-  </a>
+      <div class="d-flex justify-content-between mt-2 w-100">
+        <p class="text-muted">
+          {{ filteredChannels?.length || "0" }} channel<span
+            *ngIf="filteredChannels.length > 1"
+            >s</span
+          >
+        </p>
+        <div class="dropdown">
+          <a
+            class="btn light dropdown-toggle"
+            href="#"
+            role="button"
+            id="dropdownMenuLink"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            Sort By A-Z
+          </a>
 
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-    <a class="dropdown-item" href="#">Hot</a>
-    <a class="dropdown-item" href="#">New</a>
-    <a class="dropdown-item" href="#">A-Z</a>
-  </div>
-</div>
-
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="#">Hot</a>
+            <a class="dropdown-item" href="#">New</a>
+            <a class="dropdown-item" href="#">A-Z</a>
+          </div>
+        </div>
       </div>
-
     </div>
-    <div class = 'scroll'>
-      <p class="lead my-3">New Channel</p>
-      <p class="lead my-3">New Channel</p>
+    <div class="scroll">
+      <div *ngFor="let channel of filteredChannels" class="py-2 d-flex justify-content-between">
+        <div>
+          <h6 class="font-weight-bolder">{{ channel.name }}</h6>
+          <p class="muted d-inline">10 members</p>
+          <div class="d-inline mx-2">-</div>
+          <p class="text-muted d-inline">
+            {{
+              channel?.description ||
+                "A place for stupid fuckin asswipes to talk about dumb shit"
+            }}
+          </p>
+        </div>
+        <button
+          class="btn btn-md border-secondary"
+          (click) = 'joinChannel(channel)'
+        >
+          Join
+        </button>
+      </div>
     </div>
   </div>
 </section>

@@ -1,4 +1,13 @@
+.loading {
+  background-color:green;
+}
 
+.success {
+  background-color: green;
+}
+.error {
+  color: red;
+}
 .nav-padding {
   margin-top: 96px;
 }

@@ -24,6 +24,14 @@ async function createChannel(req, res, next) {
   res.status(200).send(channel);
 };
 
+async function joinChannel(req, res) {
+  const db = req.app.get('db');
+
+  res.status(200).send(req.body);
+
+  // await db.joinChannel(req.body)
+}
+
 async function getChannel(req, res, next) {
   const db = req.app.get('db');
 
@@ -44,6 +52,7 @@ module.exports = {
   getUserChannels: asyncMiddleware(getUserChannels),
   getAllChannels:  asyncMiddleware(getAllChannels),
   createChannel:   asyncMiddleware(createChannel),
-  deleteChannel: asyncMiddleware(deleteChannel),
-  getChannel: asyncMiddleware(getChannel)
+  deleteChannel:   asyncMiddleware(deleteChannel),
+  joinChannel:     asyncMiddleware(joinChannel),
+  getChannel:      asyncMiddleware(getChannel)
 };

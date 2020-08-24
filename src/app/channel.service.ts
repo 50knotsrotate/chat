@@ -1,19 +1,26 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MessagesService } from './messages.service';
+import { UserService } from './user.service'
 
 @Injectable({
   providedIn: 'root',
 })
 export class ChannelService {
-  constructor(private http: HttpClient, private messagesService: MessagesService) {}
+  constructor(private http: HttpClient, private messagesService: MessagesService, private userService: UserService) {}
+
 
   channels;
+
   selectedChannel;
 
-  switchChannel(newChannelId) {
+  getChannelList() {
+    return this.channels || [];
+  }
+
+  switchChannel(newChannel) {
     const newChannelIndex = this.channels.findIndex(
-      (channel) => channel.id === newChannelId
+      (channel) => channel.id === newChannel.id
     );
 
     if (newChannelIndex === -1) return;
@@ -23,7 +30,34 @@ export class ChannelService {
     this.messagesService.getChannelMessages(this.selectedChannel.id);
   }
 
-  getUserChannels() {
-    return this.http.get(`http://localhost:3002/user/channels`);
+  createChannel(channel) {
+    return this.http.post('http://localhost:3002/channels', {channel})
   }
+
+  addChannel(channel) {
+    this.channels.push(channel);
+  }
+
+  joinChannel(channel) {
+   const userId = this.userService.user.id;
+
+   this.http.post(`http://localhost:3002/users/${userId}/channels`, { channel })
+     .subscribe(channel => {
+       this.addChannel(channel)
+     })
+  }
+
+  getAllChannels() {
+    return this.http.get('http://localhost:3002/channels')
+  }
+
+  getUserChannels() {
+    const userId = this.userService.user.id;
+
+    return this.http.get(`http://localhost:3002/users/${userId}/channels`)
+      .subscribe(channels => {
+        this.channels = channels;
+      })
+  }
+
 }

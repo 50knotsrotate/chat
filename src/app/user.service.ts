@@ -8,14 +8,8 @@ export class UserService {
   constructor(private http: HttpClient) {
 
   }
-  
-  public user;
 
-  userLoggedIn() { 
-    // return this.http.get('http://localhost:3002/me')
-    
-   
-  }
+  public user;
 
   isUserAuthenticated(){
     return this.http.get('http://localhost:3002/me')
@@ -24,19 +18,5 @@ export class UserService {
   setUser(user) {
     this.user = user;
    }
-
-  getUser() { 
-    // return this.http.get('http://localhost:3002/me')
-    return this.user;
-  }
-
-
-
-  // ngOnInit() { 
-  //   this.getUser()
-  //     .subscribe(user => { 
-  //       this.user = user;
-  //     })
-  // }
 
 }
